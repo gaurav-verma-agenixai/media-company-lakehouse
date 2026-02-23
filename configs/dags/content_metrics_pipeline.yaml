@@ -1,0 +1,20 @@
+dag_id: "editorial_content_metrics_pipeline"
+description: "Build content engagement aggregates for editorial analytics"
+schedule: "0 */6 * * *"
+start_date: "2025-01-01"
+catchup: false
+max_active_runs: 1
+tags:
+  - "editorial"
+  - "metrics"
+  - "lakehouse"
+owner: "team-editorial-data"
+retries: 2
+retry_delay_minutes: 10
+spark_submit:
+  application: "spark_jobs/entrypoints/run_job.py"
+  job_config: "configs/spark_jobs/content_metrics_job.yaml"
+  master: "local[*]"
+  deploy_mode: "client"
+  conf:
+    spark.sql.adaptive.enabled: "true"

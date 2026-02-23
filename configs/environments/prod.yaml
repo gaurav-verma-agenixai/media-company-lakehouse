@@ -1,0 +1,8 @@
+overrides:
+  spark_submit:
+    master: "yarn"
+    deploy_mode: "cluster"
+    conf:
+      spark.sql.shuffle.partitions: "300"
+  spark_conf:
+    spark.sql.shuffle.partitions: "300"

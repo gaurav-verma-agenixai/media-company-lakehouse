@@ -1,0 +1,19 @@
+job_name: "content-metrics-etl"
+job_class: "spark_jobs.jobs.content_metrics_job.ContentMetricsJob"
+source:
+  format: "parquet"
+  path: "s3://media-dev/raw/editorial/content_events/"
+target:
+  format: "delta"
+  path: "s3://media-dev/curated/editorial/content_metrics/"
+  mode: "overwrite"
+transformations:
+  group_by:
+    - "content_id"
+    - "event_date"
+  aggregations:
+    total_views: "SUM(view_count)"
+    total_watch_time_sec: "SUM(watch_time_seconds)"
+spark_conf:
+  spark.sql.session.timeZone: "UTC"
+  spark.sql.adaptive.enabled: "true"

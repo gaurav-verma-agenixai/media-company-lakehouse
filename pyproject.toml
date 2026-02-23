@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "media-company-lakehouse"
+version = "0.1.0"
+description = "Config-driven Airflow + Spark ETL framework for media lakehouse workloads"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Data Platform Engineering" }]
+dependencies = [
+  "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+airflow = [
+  "apache-airflow>=2.9.0",
+  "apache-airflow-providers-apache-spark>=5.0.0",
+]
+spark = [
+  "pyspark>=3.5.0",
+]
+dev = [
+  "pytest>=8.0.0",
+  "ruff>=0.6.0",
+  "mypy>=1.10.0",
+]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,7 @@
+overrides:
+  spark_submit:
+    master: "local[*]"
+    conf:
+      spark.sql.shuffle.partitions: "8"
+  spark_conf:
+    spark.sql.shuffle.partitions: "8"
